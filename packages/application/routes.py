@@ -22,8 +22,9 @@ def set_status():
 @app.route('/assign_driver', methods=['POST'])
 def assign():
     assignment = request.get_json()
-    package = Package.query.get(assignment['package'])
-    driver = Driver.query.get(assignment['driver'])
+    did, pid = assignment['driver'], assignment['package']
+    package = Package.query.get(pid)
+    driver = Driver.query.get(did)
     package.driver_id = driver.id
     db.session.commit()
     return f"Package #{package.id}: Assigned to {driver.surname.upper()}, {driver.forename}"
