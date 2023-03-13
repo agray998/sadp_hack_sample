@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+    networks:
+      - qommon
+    depends_on:
+      - drivers
+      - packages
+  mysql:
+    container_name: mysql
+    image: mysql
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - type: volume
+        source: qommon-vol
+        target: /var/lib/mysql
+    networks:
+      - qommon
+  drivers:
+    container_name: drivers
+    image: drivers
+    build: ./drivers
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - qommon
+    depends_on:
+      - mysql
+  packages:
+    container_name: packages
+    image: packages
+    build: ./packages
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - qommon
+    depends_on:
+      - mysql
+volumes:
+  qommon-vol:
+networks:
+  qommon:
