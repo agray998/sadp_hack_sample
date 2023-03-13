@@ -12,6 +12,6 @@ CREATE TABLE package (
     address VARCHAR(50) NOT NULL,
     volume FLOAT NOT NULL,
     status VARCHAR(10),
-    driver_id INT NOT NULL,
+    driver_id INT,
     FOREIGN KEY (driver_id) REFERENCES driver(id)
 );

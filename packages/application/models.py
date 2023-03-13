@@ -18,7 +18,7 @@ class Package(db.Model):
     address = db.Column(db.String(50), nullable=False)
     volume = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(10))
-    driver_id = db.Column(db.Integer, db.ForeignKey('driver.id'), nullable=False)
+    driver_id = db.Column(db.Integer, db.ForeignKey('driver.id'))
 
     def toDict(self):
         return {
