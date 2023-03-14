@@ -18,7 +18,7 @@ services:
       - packages
   mysql:
     container_name: mysql
-    image: mysql
+    image: agray998/sadp_hack_mysql
     build: ./mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -30,7 +30,7 @@ services:
       - qommon
   drivers:
     container_name: drivers
-    image: drivers
+    image: agray998/sadp_hack_drivers
     build: ./drivers
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -40,7 +40,7 @@ services:
       - mysql
   packages:
     container_name: packages
-    image: packages
+    image: agray998/sadp_hack_packages
     build: ./packages
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
