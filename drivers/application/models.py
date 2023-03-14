@@ -10,7 +10,8 @@ class Driver(db.Model):
         return {
             "id": self.id,
             "forename": self.forename,
-            "surname": self.surname
+            "surname": self.surname,
+            "assigned packages": list(package.toDict() for package in self.packages)
         }
 
 class Package(db.Model):
